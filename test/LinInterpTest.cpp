@@ -13,7 +13,7 @@
 #include <stdint.h>
 
 // LinInterp library (library under test)
-#include "../include/LinInterp.h"
+#include "../src/include/LinInterp.hpp"
 
 // Uses UnitTest++ library for testing.
 #include "./UnitTest++/src/UnitTest++.h"
@@ -34,7 +34,7 @@ TEST(TestInPositiveNumberSpaceWithPositiveGradient)
 	
 	InterpResult<double> result = linInterp.Interp(0.5);
 
-	CHECK_EQUAL(result.success, true);
+	CHECK_EQUAL(true, result.success);
 	CHECK_EQUAL(0.5, result.yVal);
 }
 
@@ -52,7 +52,7 @@ TEST(TestInPositiveNumberSpaceWithNegativeGradient)
 	
 	InterpResult<double> result = linInterp.Interp(0.5);
 
-	CHECK_EQUAL(result.success, true);
+	CHECK_EQUAL(true, result.success);
 	CHECK_EQUAL(0.5, result.yVal);
 }
 
@@ -70,7 +70,7 @@ TEST(TestInNegativeNumberSpaceWithPositiveGradient)
 	
 	InterpResult<double> result = linInterp.Interp(0.5);
 	
-	CHECK_EQUAL(result.success, true);
+	CHECK_EQUAL(true, result.success);
 	CHECK_EQUAL(-0.5, result.yVal);
 }
 
@@ -88,7 +88,7 @@ TEST(TestInNegativeNumberSpaceWithNegativeGradient)
 	
 	InterpResult<double> result = linInterp.Interp(0.5);
 	
-	CHECK_EQUAL(result.success, true);
+	CHECK_EQUAL(true, result.success);
 	CHECK_EQUAL(-0.5, result.yVal);
 }
 
@@ -106,7 +106,7 @@ TEST(ZeroGradientTest)
 	
 	InterpResult<double> result = linInterp.Interp(0.5);
 	
-	CHECK_EQUAL(result.success, true);
+	CHECK_EQUAL(true, result.success);
 	CHECK_EQUAL(1.0, result.yVal);
 }
 
@@ -126,8 +126,8 @@ TEST(XValuesDoNotIncreaseMonotomicallyTest)
 	
 	// LinInterp.Intrerp should of returned success == false,
 	// and yVal == 0.
-	CHECK_EQUAL(result.success, false);
-	CHECK_EQUAL(result.yVal, 0);
+	CHECK_EQUAL(false, result.success);
+	CHECK_CLOSE(0, result.yVal, 0.01);
 }
 
 int main()

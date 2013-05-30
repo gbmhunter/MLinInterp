@@ -22,7 +22,7 @@
 #include <cstdio>
 #include <stdio.h>
 
-#include "./Point.h"
+#include "./Point.hpp"
 //#include "./Comms/include/UartDebug.h"
 
 //===============================================================================================//

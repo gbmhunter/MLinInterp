@@ -4,8 +4,8 @@ Embedded Linear Interpolation Library
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2012/10/23
-- Last Modified: 2013/05/24
-- Version: v1.0.0.0
+- Last Modified: 2013/05/31
+- Version: v1.1.0.0
 - Company: CladLabs
 - Project: n/a
 - Language: C++
@@ -89,11 +89,11 @@ See test/LinInterpTest.cpp for more examples.
 Issues
 ======
 
-For known bugs, desired enhancements e.t.c, see BitBucket issues section.
+For known bugs, desired enhancements e.t.c, see GitHub issues section.
 	
 Changelog
 =========
 
 - v1.0.0.0 		-> (2013/05/24) Initial commit.
 - v1.0.0.1		-> (2013/05/24) Fixed formatting issue with bullet points in README.rst.
-
+- v1.1.0.0		-> (2013/05/31) Added root Makefile that compiles everything and runs unit tests. Fixed parameter order in test checks. Deleted object and .d files.

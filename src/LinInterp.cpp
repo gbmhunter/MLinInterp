@@ -15,7 +15,7 @@
 	#error Please build with C++ compiler
 #endif
 
-#include "./include/LinInterp.h"
+#include "./include/LinInterp.hpp"
 
 //===============================================================================================//
 //================================== PRECOMPILER CHECKS =========================================//
