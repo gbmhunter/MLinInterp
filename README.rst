@@ -94,6 +94,13 @@ For known bugs, desired enhancements e.t.c, see GitHub issues section.
 Changelog
 =========
 
-- v1.0.0.0 		-> (2013/05/24) Initial commit.
-- v1.0.0.1		-> (2013/05/24) Fixed formatting issue with bullet points in README.rst.
-- v1.1.0.0		-> (2013/05/31) Added root Makefile that compiles everything and runs unit tests. Fixed parameter order in test checks. Deleted object and .d files.
+======== ========== ===================================================================================================
+Version  Date       Comment
+======== ========== ===================================================================================================
+v1.1.0.1 2013/06/08 Changelog now in table format.
+v1.1.0.0 2013/05/31 Added root Makefile that compiles everything and runs unit tests. Fixed parameter order in test checks. Deleted object and .d files.
+v1.0.0.1 2013/05/24 Fixed formatting issue with bullet points in README.rst.
+v1.0.0.0 2013/05/24 Initial commit.
+
+
+======== ========== ===================================================================================================
