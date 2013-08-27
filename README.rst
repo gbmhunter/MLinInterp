@@ -2,10 +2,13 @@
 Embedded Linear Interpolation Library
 =====================================
 
+.. image:: https://travis-ci.org/gbmhunter/Cpp-LinInterp.png?branch=master   
+	:target: https://travis-ci.org/gbmhunter/Cpp-LinInterp
+
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2012/10/23
-- Last Modified: 2013/05/31
-- Version: v1.1.0.0
+- Last Modified: 2013/08/27
+- Version: v1.2.0.0
 - Company: CladLabs
 - Project: n/a
 - Language: C++
@@ -97,6 +100,7 @@ Changelog
 ======== ========== ===================================================================================================
 Version  Date       Comment
 ======== ========== ===================================================================================================
+v1.2.0.0 2013/08/27 Added .travis.yml file in root directory for Travis CI compatibility. Added Travis CI build status image to top of README.
 v1.1.0.1 2013/06/08 Changelog now in table format.
 v1.1.0.0 2013/05/31 Added root Makefile that compiles everything and runs unit tests. Fixed parameter order in test checks. Deleted object and .d files.
 v1.0.0.1 2013/05/24 Fixed formatting issue with bullet points in README.rst.
