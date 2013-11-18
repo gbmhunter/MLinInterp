@@ -5,7 +5,7 @@
 //! @date 		2013/04/17
 //! @brief 		Performs fast linear interpolation.
 //! @details
-//!				See README.rst
+//!				See README.rst in the repo's root dir for more info.
 
 //===============================================================================================//
 //====================================== HEADER GUARD ===========================================//
@@ -31,9 +31,6 @@
 
 namespace LinInterpNs
 {
-
-	//using namespace Fp;
-
 	using namespace PointNs;
 
 	//! Prints general debug messages.
@@ -43,13 +40,26 @@ namespace LinInterpNs
 	//=================================== PUBLIC TYPEDEFS ===========================================//
 	//===============================================================================================//
 
+	//! @brief		Enumeration of possible status's that can be returned in the InterpResult variable when 
+	//!				an interpolation is run.
+	typedef enum{
+		OK,
+		X_VALUE_OUT_OF_RANGE
+	} status_t;
+	
+	//===============================================================================================//
+	//================================== PUBLIC TEMPLATES ===========================================//
+	//===============================================================================================//
+	
 	//! @brief		Helper class for LinInterp class. Used as the returned object
 	//!				from LinInterp.Interp().
 	template <class yType> class InterpResult
 	{
 		public:
-			//! @brief		True if linear interpolation was successful, otherwise false.
-			bool success;
+			
+			//! @brief		Stores the "status" of the conversion.
+			//! @sa			status_t
+			status_t status;
 
 			//! @brief		The result of the linear interpolation. If success == false,
 			//!				then this will return 0.
@@ -106,6 +116,21 @@ namespace LinInterpNs
 	//! @brief 		Interpolates xVal and returns yVal
 	template <class xType, class yType> InterpResult<yType> LinInterp<xType, yType>::Interp(xType xVal)
 	{
+		// Check if xVal is below minimum xVal in pointA
+		if(xVal < pointA[0].xVal)
+		{
+			InterpResult<yType> result;
+				
+			// x-value is beyond range in pointA
+			result.status = X_VALUE_OUT_OF_RANGE;
+			
+			// Return the closest y-value, which is the one
+			// at the start of the array
+			result.yVal = pointA[0].yVal;
+			
+			return result;
+		}
+	
 		// Find which segment xVal is in
 		// Start at i=1, since can't interpolate
 		// with just one point
@@ -120,16 +145,23 @@ namespace LinInterpNs
 			// Protection against exceeding array count
 			if(i == numPoints - 1)
 			{
-				//! @todo	Return null or exception
 				InterpResult<yType> result;
-				result.success = false;
-				//result.yVal = 0x0;
+				
+				// x-value is beyond range in pointA
+				result.status = X_VALUE_OUT_OF_RANGE;
+				
+				// Return the closest y-value, which is the one
+				// at the end of the array
+				result.yVal = pointA[i].yVal;
+				
 				return result;
 			}
 			
 
 			i++;
 		}
+		
+		// xVal is now above pointA[i-1].xVal and below pointA[i].xVal
 		
 		sectionNum = i;
 		
@@ -150,11 +182,12 @@ namespace LinInterpNs
 		#endif
 		
 		InterpResult<yType> result;
+		
 		//result.yVal = fp<FP_08>(((double)(xVal-pointA[i-1].xVal)*Fix2Float<FP_08>(yDiff.intValue))/(double)xDiff) + pointA[i-1].yVal;
 		result.yVal = (yType)(((double)(xVal-pointA[i-1].xVal)*(yDiff))/(double)xDiff) + pointA[i-1].yVal;
 		
 		// If code has reached here, interpolation must of been successful
-		result.success = true;		
+		result.status = OK;		
 
 		return result;
 	}

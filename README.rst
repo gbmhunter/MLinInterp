@@ -22,21 +22,27 @@ Embedded Linear Interpolation Library
 Description
 ===========
 
-A light-weight, fast linear interpolation library designed for use
-on embedded systems (but can also run on any machine which has
-a G++ compiler).
+A light-weight, fast linear interpolation library designed for use on embedded systems (but can also run on any machine which has a G++ compiler).
  
 Requires point array to be setup separately. 
 
-X values should increase monotonically (i.e. x+1 is always > x).
-If x values in point array DO NOT increase monotonically 
-then BEHAVIOUR IS UNDEFINED. Y values
-can do whatever they want.
+x-values in point array should increase monotonically (i.e. x+1 is always > x). If x values in point array DO NOT increase monotonically then BEHAVIOUR IS UNDEFINED. Y values can do whatever they want.
+
+x-values passed to the interpolation engine which are outside of range provided in the point array return the closest y-value, which will either be y(x-min) or y(x-max). I have found this to be the safest behaviour when running on an embedded system. ``InterpResult.status`` will return ``X_VALUE_OUT_OF_RANGE``.
 
 xType and yType should be numeric types which support the operators +, -, /, * 
 (e.g. uint32_t, int32_t, double e.t.c).
 
-Comes with unit tests to ensure correct operation.
+Calling LinInterp::Interp() returns a InterpResult object which has a ``yType y_val`` and ``status_t status`` object. Read the ``y_val`` to get the result of the interpolation. ``status`` tells you additional information about the interpolation, which could be either:
+
+==================== ===========================================================================================================
+status Enumeration   Description
+==================== ===========================================================================================================
+OK						 Interpolation was o.k., x-value provided was within range given by the point array (``pointA``).
+X_VALUE_BEYOND_RANGE
+==================== ===========================================================================================================
+
+Comes with unit tests to ensure correct operation. Run the command ``make`` from the command-line to compile the project and run the unit tests.
 
 Internal Dependencies
 =====================
@@ -47,7 +53,7 @@ Internal Dependencies
 External Dependencies
 =====================
 
-- None
+None
 
 Usage
 =====
@@ -100,12 +106,11 @@ Changelog
 ======== ========== ===================================================================================================
 Version  Date       Comment
 ======== ========== ===================================================================================================
+v1.3.0.0 2013/11/19 Replaced ``bool success`` variable in InterpResult with a ``status_t status`` variable, to support x-values outside of range given in ``pointA``. Added info about out-of-range x-values to README. Removed unnecessary white-space from README. Removed x-values increasing monotonically test as behaviour is undefined in this case. Added build info to README.
 v1.2.0.1 2013/08/27 Removed semi-colon from end of heading in README.
 v1.2.0.0 2013/08/27 Added .travis.yml file in root directory for Travis CI compatibility. Added Travis CI build status image to top of README.
 v1.1.0.1 2013/06/08 Changelog now in table format.
 v1.1.0.0 2013/05/31 Added root Makefile that compiles everything and runs unit tests. Fixed parameter order in test checks. Deleted object and .d files.
 v1.0.0.1 2013/05/24 Fixed formatting issue with bullet points in README.rst.
 v1.0.0.0 2013/05/24 Initial commit.
-
-
 ======== ========== ===================================================================================================
