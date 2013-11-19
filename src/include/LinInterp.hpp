@@ -61,9 +61,13 @@ namespace LinInterpNs
 			//! @sa			status_t
 			status_t status;
 
-			//! @brief		The result of the linear interpolation. If success == false,
-			//!				then this will return 0.
+			//! @brief		The result of the linear interpolation.
 			yType yVal;
+			
+			//! @brief		The section number that the interpolation occurred in.
+			//! @details	Section 0 is before the first x-value in pointA, section 1 is between the 1st and 2nd
+			//!				x-value, ..., section numPoints is after the last x-value in the pointA.
+			uint32_t sectionNum;
 	};
 
 	template <class xType, class yType> class LinInterp
@@ -81,10 +85,6 @@ namespace LinInterpNs
 			//! @todo		If user forgets to do this, memory leaks could occur.
 			//! 				Make this automatic (use std::vector???)
 			uint32_t numPoints;
-			
-			//! @brief		Updated by the algorithm.
-			//! @todo		Make private, and provide access to READ ONLY
-			uint32_t sectionNum;
 			
 			//! @brief 		Pointer to an array of x,y data points.
 			Point<xType, yType>* pointA;
@@ -128,6 +128,9 @@ namespace LinInterpNs
 			// at the start of the array
 			result.yVal = pointA[0].yVal;
 			
+			// Section number is 0, which is the section before the first x-value in pointA
+			result.sectionNum = 0;
+			
 			return result;
 		}
 	
@@ -140,7 +143,6 @@ namespace LinInterpNs
 		{
 			// Look for first x value in array which is greater than
 			// x value of point to interpolate
-
 			
 			// Protection against exceeding array count
 			if(i == numPoints - 1)
@@ -154,16 +156,17 @@ namespace LinInterpNs
 				// at the end of the array
 				result.yVal = pointA[i].yVal;
 				
+				// The section is the one past the last x-value in the pointA, which is equal
+				// to the number numPoints (which at this point in time is i + 1).
+				result.sectionNum = i + 1;
+				
 				return result;
 			}
 			
-
 			i++;
 		}
 		
 		// xVal is now above pointA[i-1].xVal and below pointA[i].xVal
-		
-		sectionNum = i;
 		
 		#if(linInterpPRINT_DEBUG == 1)
 			snprintf(debugBuff, sizeof(debugBuff), "LIN-INTERP: Index = %u\r\n", 
@@ -183,11 +186,14 @@ namespace LinInterpNs
 		
 		InterpResult<yType> result;
 		
+		// If code has reached here, interpolation must of been successful
+		result.status = OK;	
+		
 		//result.yVal = fp<FP_08>(((double)(xVal-pointA[i-1].xVal)*Fix2Float<FP_08>(yDiff.intValue))/(double)xDiff) + pointA[i-1].yVal;
 		result.yVal = (yType)(((double)(xVal-pointA[i-1].xVal)*(yDiff))/(double)xDiff) + pointA[i-1].yVal;
 		
-		// If code has reached here, interpolation must of been successful
-		result.status = OK;		
+		// When the x-value is within the range of pointA, sectionNum is equal to i
+		result.sectionNum = i;
 
 		return result;
 	}

@@ -8,7 +8,7 @@ Embedded Linear Interpolation Library
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2012/10/23
 - Last Modified: 2013/11/19
-- Version: v1.3.1.1
+- Version: v1.4.0.0
 - Company: CladLabs
 - Project: n/a
 - Language: C++
@@ -33,7 +33,7 @@ x-values passed to the interpolation engine which are outside of range provided 
 xType and yType should be numeric types which support the operators +, -, /, * 
 (e.g. uint32_t, int32_t, double e.t.c).
 
-Calling LinInterp::Interp() returns a InterpResult object which has a ``yType y_val`` and ``status_t status`` object. Read the ``y_val`` to get the result of the interpolation. ``status`` tells you additional information about the interpolation, which could be either:
+Calling LinInterp::Interp() returns a InterpResult object which has a ``yType y_val``, ``status_t status`` and `sectionNum` object. Read the ``y_val`` to get the result of the interpolation. ``status`` tells you additional information about the interpolation, which could be either:
 
 ====================== ===========================================================================================================
 ``status`` Enumeration Description
@@ -41,6 +41,8 @@ Calling LinInterp::Interp() returns a InterpResult object which has a ``yType y_
 OK						     Interpolation was o.k., x-value provided was within range given by the point array (``pointA``).
 X_VALUE_OUT_OF_RANGE   x-value provided to interpolation engine was out of the range in pointA. In this case, `InterpResult.yval` will be the closest value (either y(xmin) or y(xmax)). 
 ====================== ===========================================================================================================
+
+The ``sectionNum`` object tells you which "section" the interpolation occurred in. Section 0 is before the first x-value in ``pointA``, section 1 is between the 1st and 2nd x-value, section 2 is between the 2nd and 3rd x-value, ..., section ``numPoints`` is after the last x-value in the ``pointA``.
 
 Comes with unit tests to ensure correct operation. Run the command ``make`` from the command-line to compile the project and run the unit tests.
 
@@ -106,6 +108,7 @@ Changelog
 ======== ========== ===================================================================================================
 Version  Date       Comment
 ======== ========== ===================================================================================================
+v1.4.0.0 2013/11/19 ``InterpResult`` now contains a variable called ``sectionNum``, which indicates which section the interpolation occurred in. Got rid of public ``LinInterp.sectionNum`` variable. Added info about this to the README. Closes #15, closes #14.
 v1.3.1.1 2013/11/19 Fixed table formatting issue in README and added more info about returned statuses.
 v1.3.1.0 2013/11/19 Added unit test ``OnlyLooksAtNumPointsTest`` to make sure linear interpolation engine only uses the number of points specified by ``LinInterp.numPoints``.
 v1.3.0.0 2013/11/19 Replaced ``bool success`` variable in InterpResult with a ``status_t status`` variable, to support x-values outside of range given in ``pointA``. Added info about out-of-range x-values to README. Removed unnecessary white-space from README. Removed x-values increasing monotonically test as behaviour is undefined in this case. Added build info to README.
