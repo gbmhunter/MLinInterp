@@ -8,7 +8,7 @@ Embedded Linear Interpolation Library
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2012/10/23
 - Last Modified: 2013/11/19
-- Version: v1.4.0.0
+- Version: v1.4.1.0
 - Company: CladLabs
 - Project: n/a
 - Language: C++
@@ -108,6 +108,7 @@ Changelog
 ======== ========== ===================================================================================================
 Version  Date       Comment
 ======== ========== ===================================================================================================
+v1.4.1.0 2013/11/19 Added unit test ``SectionNumTest`` which tests if section number is calculated correctly. Closes #16.
 v1.4.0.0 2013/11/19 ``InterpResult`` now contains a variable called ``sectionNum``, which indicates which section the interpolation occurred in. Got rid of public ``LinInterp.sectionNum`` variable. Added info about this to the README. Closes #15, closes #14.
 v1.3.1.1 2013/11/19 Fixed table formatting issue in README and added more info about returned statuses.
 v1.3.1.0 2013/11/19 Added unit test ``OnlyLooksAtNumPointsTest`` to make sure linear interpolation engine only uses the number of points specified by ``LinInterp.numPoints``.

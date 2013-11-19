@@ -196,6 +196,38 @@ TEST(OnlyLooksAtNumPointsTest)
 	CHECK_CLOSE(1.0, result.yVal, 0.01);
 }
 
+TEST(SectionNumTest)
+{
+	LinInterp<double, double> linInterp;
+	Point<double, double> pointA[3];
+	pointA[0].xVal = 0.0;
+	pointA[0].yVal = 0.0;
+	pointA[1].xVal = 1.0;
+	pointA[1].yVal = 1.0;
+	pointA[2].xVal = 2.0;
+	pointA[2].yVal = 2.0;
+
+	linInterp.pointA = pointA;
+	
+	linInterp.numPoints = 3;
+	
+	// Ask for interpolation below minimum x-value in point array
+	InterpResult<double> result = linInterp.Interp(-1);	
+	CHECK_EQUAL(0, result.sectionNum);
+	
+	// Ask for interpolation between pointA[0] and pointA[1]
+	result = linInterp.Interp(0.5);
+	CHECK_EQUAL(1, result.sectionNum);
+	
+	// Ask for interpolation between pointA[1] and pointA[2]
+	result = linInterp.Interp(1.5);	
+	CHECK_EQUAL(2, result.sectionNum);
+	
+	// Ask for interpolation above pointA[2]
+	result = linInterp.Interp(2.5);	
+	CHECK_EQUAL(3, result.sectionNum);
+}
+
 int main()
 {
 	// Run unit tests
