@@ -7,8 +7,8 @@ Embedded Linear Interpolation Library
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2012/10/23
-- Last Modified: 2013/08/27
-- Version: v1.2.0.1
+- Last Modified: 2013/11/19
+- Version: v1.3.1.0
 - Company: CladLabs
 - Project: n/a
 - Language: C++
@@ -106,6 +106,7 @@ Changelog
 ======== ========== ===================================================================================================
 Version  Date       Comment
 ======== ========== ===================================================================================================
+v1.3.1.0 2013/11/19 Added unit test ``OnlyLooksAtNumPointsTest`` to make sure linear interpolation engine only uses the number of points specified by ``LinInterp.numPoints``.
 v1.3.0.0 2013/11/19 Replaced ``bool success`` variable in InterpResult with a ``status_t status`` variable, to support x-values outside of range given in ``pointA``. Added info about out-of-range x-values to README. Removed unnecessary white-space from README. Removed x-values increasing monotonically test as behaviour is undefined in this case. Added build info to README.
 v1.2.0.1 2013/08/27 Removed semi-colon from end of heading in README.
 v1.2.0.0 2013/08/27 Added .travis.yml file in root directory for Travis CI compatibility. Added Travis CI build status image to top of README.

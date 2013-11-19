@@ -172,6 +172,30 @@ TEST(xValueAboveMaximumTest)
 	CHECK_CLOSE(1.0, result.yVal, 0.01);
 }
 
+TEST(OnlyLooksAtNumPointsTest)
+{
+	LinInterp<double, double> linInterp;
+	Point<double, double> pointA[3];
+	pointA[0].xVal = 0.0;
+	pointA[0].yVal = 0.0;
+	pointA[1].xVal = 1.0;
+	pointA[1].yVal = 1.0;
+	pointA[2].xVal = 2.0;
+	pointA[2].yVal = 2.0;
+
+	linInterp.pointA = pointA;
+	
+	// Only tell the engine about 2 of the 3 points
+	linInterp.numPoints = 2;
+	
+	// Ask for interpolation above maximum x-value in point array
+	InterpResult<double> result = linInterp.Interp(1.5);
+	
+	// LinInterp.Interp() should of returned closest y-value, and status X_VALUE_OUT_OF_RANGE
+	CHECK_EQUAL(X_VALUE_OUT_OF_RANGE, result.status);
+	CHECK_CLOSE(1.0, result.yVal, 0.01);
+}
+
 int main()
 {
 	// Run unit tests
