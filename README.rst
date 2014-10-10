@@ -11,8 +11,8 @@ A portable, microcontroller friendly linear interpolation module.
 
 - Author: Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2012-10-23
-- Last Modified: 2014-10-10
-- Version: v2.0.0.0
+- Last Modified: 2014-10-11
+- Version: v2.0.1.0
 - Company: mbedded.ninja
 - Project: MToolkit module
 - Language: C++
@@ -111,6 +111,7 @@ Changelog
 ========= ========== ===================================================================================================
 Version   Date       Comment
 ========= ========== ===================================================================================================
+v2.0.1.0  2014-10-11 Updated .travis.yml file to support C++11, closes #26.
 v2.0.0.0  2014-10-10 Removed UnitTest++ from /test and now use MUnitTest from an external location instead, closes #18. Added eclipse project files, closes #19. Upgraded the Makefile to be similar to the other modules in MToolkit, closes #20. Added everything into the MbeddedNinja namespace, closes #21. Moved include directory out from inside src directory and into root folder, closes #22. Added 'api' folder and file, closes #23. Added main.cpp file for tests, closes #24. Removed conditional debug prints, closes #25.
 v1.4.1.0  2013-11-19 Added unit test ``SectionNumTest`` which tests if section number is calculated correctly. Closes #16.
 v1.4.0.0  2013-11-19 ``InterpResult`` now contains a variable called ``sectionNum``, which indicates which section the interpolation occurred in. Got rid of public ``LinInterp.sectionNum`` variable. Added info about this to the README. Closes #15, closes #14.
