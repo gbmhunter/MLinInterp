@@ -1,26 +1,28 @@
 //!
-//! @file 		LinInterpTest.h
-//! @author 	Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlab.com)
-//! @edited 	n/a
-//! @date 		2013/05/23
-//! @brief 		Performs unit tests on LinInterp library.
+//! @file 			LinInterpTest.cpp
+//! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+//! @edited 		n/a
+//! @created		2013-05-23
+//! @last-modified 	2014-10-10
+//! @brief 			Performs unit tests on LinInterp library.
 //! @details
 //!				See README.rst in the repo's root dir for more info.
 
-// Relys on point library working correctly
 
+//===== SYSTEM LIBRARIES =====//
 #include <stdio.h>
 #include <stdint.h>
 
-// LinInterp library (library under test)
-#include "../src/include/LinInterp.hpp"
+//===== USER LIBRARIES =====//
+#include "MUnitTest/api/MUnitTestApi.hpp"
 
-// Uses UnitTest++ library for testing.
-#include "./UnitTest++/src/UnitTest++.h"
+//===== USER SOURCE =====//
+#include "../api/MLinInterpApi.hpp"
 
-using namespace LinInterpNs;
 
-TEST(TestInPositiveNumberSpaceWithPositiveGradient)
+using namespace MbeddedNinja::MLinInterpNs;
+
+MTEST(TestInPositiveNumberSpaceWithPositiveGradient)
 {
 	LinInterp<double, double> linInterp;
 	Point<double, double> pointA[2];
@@ -38,7 +40,7 @@ TEST(TestInPositiveNumberSpaceWithPositiveGradient)
 	CHECK_EQUAL(0.5, result.yVal);
 }
 
-TEST(TestInPositiveNumberSpaceWithNegativeGradient)
+MTEST(TestInPositiveNumberSpaceWithNegativeGradient)
 {
 	LinInterp<double, double> linInterp;
 	Point<double, double> pointA[2];
@@ -56,7 +58,7 @@ TEST(TestInPositiveNumberSpaceWithNegativeGradient)
 	CHECK_EQUAL(0.5, result.yVal);
 }
 
-TEST(TestInNegativeNumberSpaceWithPositiveGradient)
+MTEST(TestInNegativeNumberSpaceWithPositiveGradient)
 {
 	LinInterp<double, double> linInterp;
 	Point<double, double> pointA[2];
@@ -74,7 +76,7 @@ TEST(TestInNegativeNumberSpaceWithPositiveGradient)
 	CHECK_EQUAL(-0.5, result.yVal);
 }
 
-TEST(TestInNegativeNumberSpaceWithNegativeGradient)
+MTEST(TestInNegativeNumberSpaceWithNegativeGradient)
 {
 	LinInterp<double, double> linInterp;
 	Point<double, double> pointA[2];
@@ -92,7 +94,7 @@ TEST(TestInNegativeNumberSpaceWithNegativeGradient)
 	CHECK_EQUAL(-0.5, result.yVal);
 }
 
-TEST(ZeroGradientTest)
+MTEST(ZeroGradientTest)
 {
 	LinInterp<double, double> linInterp;
 	Point<double, double> pointA[2];
@@ -132,7 +134,7 @@ TEST(XValuesDoNotIncreaseMonotomicallyTest)
 }
 */
 
-TEST(xValueBelowMinimumTest)
+MTEST(xValueBelowMinimumTest)
 {
 	LinInterp<double, double> linInterp;
 	Point<double, double> pointA[2];
@@ -152,7 +154,7 @@ TEST(xValueBelowMinimumTest)
 	CHECK_CLOSE(0.0, result.yVal, 0.01);
 }
 
-TEST(xValueAboveMaximumTest)
+MTEST(xValueAboveMaximumTest)
 {
 	LinInterp<double, double> linInterp;
 	Point<double, double> pointA[2];
@@ -172,7 +174,7 @@ TEST(xValueAboveMaximumTest)
 	CHECK_CLOSE(1.0, result.yVal, 0.01);
 }
 
-TEST(OnlyLooksAtNumPointsTest)
+MTEST(OnlyLooksAtNumPointsTest)
 {
 	LinInterp<double, double> linInterp;
 	Point<double, double> pointA[3];
@@ -196,7 +198,7 @@ TEST(OnlyLooksAtNumPointsTest)
 	CHECK_CLOSE(1.0, result.yVal, 0.01);
 }
 
-TEST(SectionNumTest)
+MTEST(SectionNumTest)
 {
 	LinInterp<double, double> linInterp;
 	Point<double, double> pointA[3];
@@ -226,10 +228,4 @@ TEST(SectionNumTest)
 	// Ask for interpolation above pointA[2]
 	result = linInterp.Interp(2.5);	
 	CHECK_EQUAL(3, result.sectionNum);
-}
-
-int main()
-{
-	// Run unit tests
-	return UnitTest::RunAllTests();
 }

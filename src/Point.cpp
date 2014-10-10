@@ -1,11 +1,12 @@
 //!
-//! @file 		Point.c
-//! @author 	Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlab.com)
-//! @edited 	n/a
-//! @date 		17/04/2013
-//! @brief 		Represents a 2D point with x and y co-ordinates.
+//! @file 			Point.cpp
+//! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+//! @edited 		n/a
+//! @created 		2013-04-17
+//! @last-modified	2014-10-10
+//! @brief 			Represents a 2D point with x and y co-ordinates.
 //! @details
-//!				See README.rst 
+//!		See README.rst in root dir for more info.
 
 //===============================================================================================//
 //========================================= INCLUDES ============================================//
@@ -16,7 +17,7 @@
 #endif
 
 // User
-#include "./include/LinInterp.h"
+#include "../include/Point.hpp"
 
 //===============================================================================================//
 //================================== PRECOMPILER CHECKS =========================================//
@@ -27,14 +28,15 @@
 //======================================== NAMESPACE ============================================//
 //===============================================================================================//
 
-namespace LinInterpNs
+namespace MbeddedNinja
 {
+	namespace MLinInterpNs
+	{
 
-	using namespace Fp;
+		// All code in ../include/Point.hpp (uses templates)
 
-	// All code in /include/Point.hpp (uses templates)
-
-} // namespace LinInterpNs
+	} // namespace MLinInterpNs
+} // namespace MbeddedNinja
 
 //===============================================================================================//
 //========================================= GRAVEYARD ===========================================//

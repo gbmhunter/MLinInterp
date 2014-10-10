@@ -1,16 +1,20 @@
 =====================================
-Embedded Linear Interpolation Library
+MLinInterp
 =====================================
 
-.. image:: https://travis-ci.org/gbmhunter/Cpp-LinInterp.png?branch=master   
-	:target: https://travis-ci.org/gbmhunter/Cpp-LinInterp
+-------------------------------------------------------
+A portable, microcontroller friendly linear interpolation module.
+-------------------------------------------------------
 
-- Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
-- Created: 2012/10/23
-- Last Modified: 2013/11/19
-- Version: v1.4.1.0
-- Company: CladLabs
-- Project: n/a
+.. image:: https://travis-ci.org/mbedded-ninja/MLinInterp.png?branch=master   
+	:target: https://travis-ci.org/mbedded-ninja/MLinInterp
+
+- Author: Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+- Created: 2012-10-23
+- Last Modified: 2014-10-10
+- Version: v2.0.0.0
+- Company: mbedded.ninja
+- Project: MToolkit module
 - Language: C++
 - Compiler: GCC	
 - uC Model: All
@@ -45,17 +49,16 @@ X_VALUE_OUT_OF_RANGE   x-value provided to interpolation engine was out of the r
 The ``sectionNum`` object tells you which "section" the interpolation occurred in. Section 0 is before the first x-value in ``pointA``, section 1 is between the 1st and 2nd x-value, section 2 is between the 2nd and 3rd x-value, ..., section ``numPoints`` is after the last x-value in the ``pointA``.
 
 Comes with unit tests to ensure correct operation. Run the command ``make`` from the command-line to compile the project and run the unit tests.
-
-Internal Dependencies
-=====================
-	
-- Point (src/). Helper class which encapsulates a single point for the linear interpolation algorithm.
-- UnitTest++ (test/UnitTest++). Lightweight library for unit testing.
 		
-External Dependencies
-=====================
+Code Dependencies
+=================
 
-None
+====================== ==================== ======================================================================
+Dependency             Delivery             Usage
+====================== ==================== ======================================================================
+MAssert                External module      Providing runtime safety checks against this module.
+MUnitTest              External module      Framework for unit tests.
+====================== ==================== ======================================================================
 
 Usage
 =====
@@ -105,18 +108,19 @@ For known bugs, desired enhancements e.t.c, see GitHub issues section.
 Changelog
 =========
 
-======== ========== ===================================================================================================
-Version  Date       Comment
-======== ========== ===================================================================================================
-v1.4.1.0 2013/11/19 Added unit test ``SectionNumTest`` which tests if section number is calculated correctly. Closes #16.
-v1.4.0.0 2013/11/19 ``InterpResult`` now contains a variable called ``sectionNum``, which indicates which section the interpolation occurred in. Got rid of public ``LinInterp.sectionNum`` variable. Added info about this to the README. Closes #15, closes #14.
-v1.3.1.1 2013/11/19 Fixed table formatting issue in README and added more info about returned statuses.
-v1.3.1.0 2013/11/19 Added unit test ``OnlyLooksAtNumPointsTest`` to make sure linear interpolation engine only uses the number of points specified by ``LinInterp.numPoints``.
-v1.3.0.0 2013/11/19 Replaced ``bool success`` variable in InterpResult with a ``status_t status`` variable, to support x-values outside of range given in ``pointA``. Added info about out-of-range x-values to README. Removed unnecessary white-space from README. Removed x-values increasing monotonically test as behaviour is undefined in this case. Added build info to README.
-v1.2.0.1 2013/08/27 Removed semi-colon from end of heading in README.
-v1.2.0.0 2013/08/27 Added .travis.yml file in root directory for Travis CI compatibility. Added Travis CI build status image to top of README.
-v1.1.0.1 2013/06/08 Changelog now in table format.
-v1.1.0.0 2013/05/31 Added root Makefile that compiles everything and runs unit tests. Fixed parameter order in test checks. Deleted object and .d files.
-v1.0.0.1 2013/05/24 Fixed formatting issue with bullet points in README.rst.
-v1.0.0.0 2013/05/24 Initial commit.
-======== ========== ===================================================================================================
+========= ========== ===================================================================================================
+Version   Date       Comment
+========= ========== ===================================================================================================
+v2.0.0.0  2014-10-10 Removed UnitTest++ from /test and now use MUnitTest from an external location instead, closes #18. Added eclipse project files, closes #19. Upgraded the Makefile to be similar to the other modules in MToolkit, closes #20. Added everything into the MbeddedNinja namespace, closes #21. Moved include directory out from inside src directory and into root folder, closes #22. Added 'api' folder and file, closes #23. Added main.cpp file for tests, closes #24. Removed conditional debug prints, closes #25.
+v1.4.1.0  2013-11-19 Added unit test ``SectionNumTest`` which tests if section number is calculated correctly. Closes #16.
+v1.4.0.0  2013-11-19 ``InterpResult`` now contains a variable called ``sectionNum``, which indicates which section the interpolation occurred in. Got rid of public ``LinInterp.sectionNum`` variable. Added info about this to the README. Closes #15, closes #14.
+v1.3.1.1  2013-11-19 Fixed table formatting issue in README and added more info about returned statuses.
+v1.3.1.0  2013-11-19 Added unit test ``OnlyLooksAtNumPointsTest`` to make sure linear interpolation engine only uses the number of points specified by ``LinInterp.numPoints``.
+v1.3.0.0  2013-11-19 Replaced ``bool success`` variable in InterpResult with a ``status_t status`` variable, to support x-values outside of range given in ``pointA``. Added info about out-of-range x-values to README. Removed unnecessary white-space from README. Removed x-values increasing monotonically test as behaviour is undefined in this case. Added build info to README.
+v1.2.0.1  2013-08-27 Removed semi-colon from end of heading in README.
+v1.2.0.0  2013-08-27 Added .travis.yml file in root directory for Travis CI compatibility. Added Travis CI build status image to top of README.
+v1.1.0.1  2013-06-08 Changelog now in table format.
+v1.1.0.0  2013-05-31 Added root Makefile that compiles everything and runs unit tests. Fixed parameter order in test checks. Deleted object and .d files.
+v1.0.0.1  2013-05-24 Fixed formatting issue with bullet points in README.rst.
+v1.0.0.0  2013-05-24 Initial commit.
+========= ========== ===================================================================================================

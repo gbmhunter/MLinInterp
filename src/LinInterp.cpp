@@ -1,19 +1,21 @@
 //!
-//! @file 		LinInterp.c
-//! @author 	Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlab.com)
-//! @edited 	n/a
-//! @date 		2013/04/17
-//! @brief 		Contains non-template code for the LinInterp code.
+//! @file 			LinInterp.cpp
+//! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
+//! @edited 		n/a
+//! @created 		2013-04-17
+//! @last-modified	2014-10-10
+//! @brief 			Contains non-template code for the LinInterp code.
 //! @details
-//!				See README.rst 
+//!		See README.rst in root dir for more info.
+
+#ifndef __cplusplus
+	#error Please build with C++ compiler
+#endif
 
 //===============================================================================================//
 //========================================= INCLUDES ============================================//
 //===============================================================================================//
 
-#ifndef __cplusplus
-	#error Please build with C++ compiler
-#endif
 
 #include "./include/LinInterp.hpp"
 
@@ -26,14 +28,15 @@
 //======================================== NAMESPACE ============================================//
 //===============================================================================================//
 
-namespace LinInterp
+namespace MbeddedNinja
 {
+	namespace MLinInterpNs
+	{
 
-	// Core LinInterp code uses templates in .h file.
+		// Core LinInterp code uses templates in .h file.
 
-	
-
-} // namespace LinInterp
+	} // namespace MLinInterpNs
+}
 
 //===============================================================================================//
 //========================================= GRAVEYARD ===========================================//
